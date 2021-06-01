@@ -10,8 +10,10 @@ def index():
         try:
             getVideoLink = request.form.get('url')
             video = downloadFunc(getVideoLink)
-            return send_file(video,as_attachment=True)
-            os.remove(video)
+            return send_file(video,as_attachment=True)   
         except:
             return 'Bir hata meydana geldi.'
+        finally:
+            os.remove(video)
+            
     return render_template('index.html')
